@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		
+		
+		<script>
+			//父类构造函数
+			function SuperType(name){
+				this.name = name;
+				this.colors = ['red', 'blue', 'green']
+			}
+			//父类原型
+			SuperType.prototype.sayname = function(){
+				alert(this.name)
+			}
+			//子类构造函数
+			function SubType(name, age){
+				SuperType.call(this, name);
+				
+				this.age = age
+			}
+			//寄生式继承
+			inheritPrototype(SubType, SuperType)
+			//子类原型的方法
+			SubType.prototype.sayAge = function(){
+				alert(this.age);
+			}
+			//寄生式继承方法
+			function inheritPrototype(subType, superType){
+				// var prototype = Object.create(SuperType.prototype);
+				var prototype = object(SuperType.prototype);
+				prototype.canstructor = subType;
+				subType.prototype = prototype;
+			}
+			//相当于复制父类原型
+			function object(o){
+				function F(){};
+				F.prototype = o;
+				return new F();
+				
+			}
+		</script>
+	</body>
+</html>
